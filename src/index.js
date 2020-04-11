@@ -1,3 +1,6 @@
-import { sum } from './sum';
+import React from 'react';
+import { render } from 'react-dom';
 
-console.log('SUM', sum(2, 8));
+import App from './App';
+
+render(<App />, document.getElementById('app'));
