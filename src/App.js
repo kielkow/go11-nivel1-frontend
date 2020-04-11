@@ -1,24 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Header from './components/Header';
 
 function App() {
+  const [projects, setProjects] = useState([]);
+
+  const handleAddProject = () => {
+    setProjects([...projects, `New project ${Date.now()}`]);
+  };
+
   return (
     <>
-      <Header title="Homepage">
-        <ul>
-          <li>Menu</li>
-          <li>Projects</li>
-          <li>Profile</li>
-        </ul>
-      </Header>
-      <Header title="Projects">
-        <ul>
-          <li>ReactJS</li>
-          <li>Node.js</li>
-          <li>React Native</li>
+      <Header title="Homepage" />
+
+      <ul>
+        {projects.map(project => <li key={project}>{project}</li>)}
       </ul>
-      </Header>
+
+      <button type="button" onClick={handleAddProject}>Add</button>
     </>
   );
 }
