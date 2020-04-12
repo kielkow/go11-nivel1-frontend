@@ -7,15 +7,19 @@ import Header from './components/Header';
 
 function App() {
   const [projects, setProjects] = useState([]);
+  const [project, setProject] = useState('');
+  const [owner, setOwner] = useState('');
 
   useEffect(() => {
     api.get('projects').then(response => setProjects(response.data));
   }, []);
 
   const handleAddProject = async () => {
+    if(!project || !owner) return;
+
     const response = await api.post('projects', {
-      title: `New project ${Date.now()}`,
-      owner: 'Matheus Kielkowski'
+      title: project,
+      owner: owner
     });
 
     setProjects([...projects, response.data]);
@@ -30,6 +34,8 @@ function App() {
       </ul>
 
       <button type="button" onClick={handleAddProject}>Add</button>
+      <input type="text" onChange={e => setProject(e.target.value)}/>
+      <input type="text" onChange={e => setOwner(e.target.value)}/>
     </>
   );
 }
